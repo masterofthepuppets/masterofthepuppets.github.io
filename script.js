@@ -365,7 +365,7 @@ function heuristic(c1, c2) {
 }
 
 async function auto_solve() {
-	const delay = parseInt(prompt('Enter required delay of movement in milliseconds:'));
+	const delay = parseInt(prompt('Enter required delay of movement in milliseconds: (Recommended: 150ms)'));
 	let start = [0, 0];
 	let goal = [maze.cols - 1, maze.rows - 1];
 	let path = [];
