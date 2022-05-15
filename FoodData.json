@@ -1,1 +1,29 @@
-{"popular": {}, "recommended": {}, "allmenu": {}}
+{
+   "popular":{
+      "name":"Pizza",
+      "imageUrl":"https://cdn.shopify.com/s/files/1/0531/4668/1527/products/CRUNCHYSEAFOODVOLCANO_480x480.png",
+      "rating":"4.9",
+      "deliveryTime":"30 minutes",
+      "deliveryCharges":"Free delivery",
+      "price":"100 L.E",
+      "note":"Making the best pizza is about more than mixing up the right combo of flour, salt, water, and yeast, then throwing on a little marinara and a dash of mozzarella."
+   },
+   "recommended":{
+      "name":"Pizza",
+      "imageUrl":"https://cdn.shopify.com/s/files/1/0531/4668/1527/products/CRUNCHYSEAFOODVOLCANO_480x480.png",
+      "rating":"4.9",
+      "deliveryTime":"30 minutes",
+      "deliveryCharges":"Free delivery",
+      "price":"100 L.E",
+      "note":"Making the best pizza is about more than mixing up the right combo of flour, salt, water, and yeast, then throwing on a little marinara and a dash of mozzarella."
+   },
+   "allmenu":{
+      "name":"Pizza",
+      "imageUrl":"https://cdn.shopify.com/s/files/1/0531/4668/1527/products/CRUNCHYSEAFOODVOLCANO_480x480.png",
+      "rating":"4.9",
+      "deliveryTime":"30 minutes",
+      "deliveryCharges":"Free delivery",
+      "price":"100 L.E",
+      "note":"Making the best pizza is about more than mixing up the right combo of flour, salt, water, and yeast, then throwing on a little marinara and a dash of mozzarella."
+   }
+}
