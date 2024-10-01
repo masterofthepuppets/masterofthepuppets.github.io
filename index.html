@@ -3,27 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
-    <title>Maze game</title>
+    <title>Testing page</title>
 </head>
-<body onload="onLoad();">
-    <header>Maze game</header>
-    <canvas id="maze"></canvas>
-    <div class="settings">
-        <label for="cols">Columns:</label>
-        <input id="cols" type="text" size="5" value="10"><br>
-        <label for="rows">Rows:</label>
-        <input id="rows" type="text" size="5" value="10"><br>
-        <input id="generate" type="button" value="Generate">
-        <input id="auto_solve" type="button" value="Let AI solve it">
-    </div>
-    <div class="controls">
-        <div id="up" class="up">&#8679;</div>
-        <div id="right" class="right">&#8680;</div>
-        <div id="down" class="down">&#8681;</div>
-        <div id="left" class="left">&#8678;</div>
-    </div>
-    <footer>AI Project for FCIS Mansoura University</footer>
+<body>
+    <header>This is a testing page</header>
+    <br />
+    <div id="view"></div>
+    <script>
+        document.getElementById('view').textContent = location.hash;
+    </script>
 </body>
 </html>
