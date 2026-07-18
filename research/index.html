@@ -1,0 +1,35 @@
+---
+layout: default
+title: Research
+permalink: /research/
+description: >-
+  Technical write-ups on vulnerability research by Ahmed Y. Elmogy.
+---
+<div class="wrap wrap--prose">
+  <h1 class="page-title">Research</h1>
+  <p class="page-intro">
+    Long-form technical write-ups: root-cause analysis and exploitation of the
+    issues listed under <a href="{{ '/advisories/' | relative_url }}">advisories</a>.
+  </p>
+
+  {%- if site.posts.size > 0 %}
+  <ul class="post-list">
+    {%- for post in site.posts %}
+    <li class="post-item">
+      <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+      <span class="post-date">
+        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time>
+        {%- if post.advisory %} &middot; {{ post.advisory }}{% endif %}
+      </span>
+      {%- if post.description %}
+      <p class="post-excerpt">{{ post.description }}</p>
+      {%- endif %}
+    </li>
+    {%- endfor %}
+  </ul>
+  {%- else %}
+  <div class="empty">
+    <p>No write-ups published yet.</p>
+  </div>
+  {%- endif %}
+</div>

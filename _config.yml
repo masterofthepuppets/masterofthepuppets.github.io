@@ -1,54 +1,60 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
-#
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
-#
-# If you need help with YAML syntax, here are some quick references for you:
-# https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
-# https://learnxinyminutes.com/docs/yaml/
-#
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
-
+# --- Site -------------------------------------------------------------------
 title: Ahmed Y. Elmogy
-email: samohasmoha07@gmail.com
-description: >- # this means to ignore newlines until "baseurl:"
-  This is my personal blog where I'll publish writeups about my work
-  in web security research.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://masterofthepuppets.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+tagline: Independent security researcher
+description: >-
+  Vulnerability research and security advisories by Ahmed Y. Elmogy, an
+  independent security researcher. Published CVEs in Dell, ATEN, Ivanti,
+  Red Hat and QNAP products.
+url: "https://masterofthepuppets.github.io"
+baseurl: ""
+lang: en
+timezone: Africa/Cairo
+
+# --- Identity ---------------------------------------------------------------
+# advisory_prefix is baked into every advisory ID. The IDs are meant to be
+# citable, so changing this after publication breaks every saved link.
+advisory_prefix: AYE
+
+author:
+  name: Ahmed Y. Elmogy
+  handle: masterofthepuppets
+
+github_username: masterofthepuppets
 twitter_username: AhmedYElmogy
-github_username:  masterofthepuppets
 
-# Build settings
-theme: minima
+# Blank deliberately: any address rendered here gets scraped within days.
+# Set it and the About page grows a contact line; leave it and it doesn't.
+email:
+
+# --- Build ------------------------------------------------------------------
+# No `theme:` key, on purpose. Every layout under _layouts/ is hand-written,
+# so no theme markup or theme CSS is inherited.
 plugins:
-  - jekyll-feed
+  - jekyll-feed      # /feed.xml   — static Atom, for people who subscribe
+  - jekyll-sitemap   # /sitemap.xml — static XML, referenced by robots.txt
 
-# Exclude from processing.
-# The following items will not be processed, by default.
-# Any item listed under the `exclude:` key here will be automatically added to
-# the internal "default list".
-#
-# Excluded items can be processed by explicitly listing the directories or
-# their entries' file path in the `include:` list.
-#
-# exclude:
-#   - .sass-cache/
-#   - .jekyll-cache/
-#   - gemfiles/
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules/
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+collections:
+  advisories:
+    output: true
+    permalink: /advisories/:name/
+
+defaults:
+  - scope: { path: "", type: advisories }
+    values: { layout: advisory }
+  - scope: { path: "", type: posts }
+    values: { layout: post }
+
+feed:
+  path: /feed.xml
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  hard_wrap: false
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - README.md

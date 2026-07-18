@@ -1,0 +1,302 @@
+---
+---
+/* Ahmed Y. Elmogy — site styles.
+   Self-hosted, no imports, no webfonts. Every colour is a token so the whole
+   palette moves from one block. Dark mode follows the OS; there is no toggle
+   because a toggle needs JavaScript and the site ships none. */
+
+:root {
+  --bg:      #ffffff;
+  --bg-alt:  #f7f8f9;
+  --fg:      #15171a;
+  --muted:   #5f646b;
+  --faint:   #8b9198;
+  --rule:    #e3e5e8;
+  --accent:  #9c1f24;
+  --sel:     #f4dcdd;
+
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+
+  --measure: 44rem;   /* prose column */
+  --wide:    56rem;   /* index / listing column */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:     #0f1012;
+    --bg-alt: #17191c;
+    --fg:     #e8e9eb;
+    --muted:  #9aa0a7;
+    --faint:  #6c7178;
+    --rule:   #24262a;
+    --accent: #ef6a6e;
+    --sel:    #3a1f21;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.65;
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--sel); }
+
+a { color: inherit; text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 2px; }
+a:hover { color: var(--accent); text-decoration-color: currentColor; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 1px; }
+
+code, kbd, pre, samp { font-family: var(--mono); font-size: 0.875em; }
+
+/* --- Skip link ----------------------------------------------------------- */
+
+.skip {
+  position: absolute; left: -9999px;
+  background: var(--bg); color: var(--fg);
+  padding: 0.5rem 0.75rem; border: 1px solid var(--accent); z-index: 10;
+}
+.skip:focus { left: 0.5rem; top: 0.5rem; }
+
+/* --- Shell --------------------------------------------------------------- */
+
+.wrap { width: 100%; max-width: var(--wide); margin: 0 auto; padding: 0 1.25rem; }
+.wrap--prose { max-width: var(--measure); }
+
+.site-header {
+  border-bottom: 1px solid var(--rule);
+  padding: 1.5rem 0;
+  margin-bottom: 3rem;
+}
+.site-header .wrap {
+  display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem;
+  align-items: baseline; justify-content: space-between;
+}
+
+.brand {
+  font-weight: 650;
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.brand:hover { color: var(--accent); }
+.brand-mark { color: var(--accent); }
+
+.site-nav { display: flex; gap: 1.5rem; font-size: 0.9375rem; }
+.site-nav a { text-decoration: none; color: var(--muted); }
+.site-nav a:hover { color: var(--accent); }
+.site-nav a[aria-current="page"] { color: var(--fg); font-weight: 550; }
+
+main { display: block; min-height: 50vh; }
+
+.site-footer {
+  border-top: 1px solid var(--rule);
+  margin-top: 5rem; padding: 1.5rem 0 3rem;
+  color: var(--faint); font-size: 0.875rem;
+}
+.site-footer .wrap {
+  display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; justify-content: space-between;
+}
+.site-footer a { color: var(--muted); text-decoration: none; }
+.site-footer a:hover { color: var(--accent); }
+.footer-links { display: flex; gap: 1.25rem; }
+
+/* --- Headings ------------------------------------------------------------ */
+
+h1, h2, h3, h4 { line-height: 1.25; letter-spacing: -0.015em; margin: 0 0 0.5rem; }
+h1 { font-size: 1.75rem; font-weight: 660; }
+h2 { font-size: 1.25rem; font-weight: 620; margin-top: 2.5rem; }
+h3 { font-size: 1.0625rem; font-weight: 600; margin-top: 2rem; }
+
+.page-title { margin-bottom: 0.375rem; }
+.page-intro { color: var(--muted); margin: 0 0 2.5rem; }
+
+/* --- Home ---------------------------------------------------------------- */
+
+.hero { margin-bottom: 3.5rem; }
+.hero h1 { font-size: 2rem; margin-bottom: 0.75rem; }
+.hero p { color: var(--muted); margin: 0 0 1rem; max-width: var(--measure); }
+.hero .lede { color: var(--fg); font-size: 1.0625rem; }
+
+.stats {
+  display: flex; flex-wrap: wrap; gap: 2.5rem;
+  border-block: 1px solid var(--rule);
+  padding: 1.25rem 0; margin: 2.5rem 0;
+  list-style: none;
+}
+.stats div { display: flex; flex-direction: column; gap: 0.125rem; }
+.stat-n { font-family: var(--mono); font-size: 1.5rem; font-weight: 600; line-height: 1.1; }
+.stat-l { font-size: 0.8125rem; color: var(--faint); text-transform: uppercase; letter-spacing: 0.06em; }
+
+.section-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 1rem; margin: 3rem 0 1.25rem;
+}
+.section-head h2 { margin: 0; }
+.section-head a { font-size: 0.875rem; color: var(--muted); text-decoration: none; white-space: nowrap; }
+.section-head a:hover { color: var(--accent); }
+
+/* --- Advisory listing ---------------------------------------------------- */
+
+.year {
+  font-family: var(--mono);
+  font-size: 0.8125rem; font-weight: 600;
+  color: var(--faint); letter-spacing: 0.08em;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 0.5rem; margin: 2.75rem 0 0.25rem;
+}
+.year:first-of-type { margin-top: 0; }
+
+.adv-list { list-style: none; margin: 0; padding: 0; }
+
+.adv {
+  display: grid;
+  grid-template-columns: 10.5rem 1fr;
+  gap: 0.25rem 1.5rem;
+  padding: 0.9375rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.adv-id {
+  font-family: var(--mono); font-size: 0.8125rem;
+  color: var(--accent); text-decoration: none; white-space: nowrap;
+  padding-top: 0.1875rem;
+}
+.adv-id:hover { text-decoration: underline; }
+.adv-title { font-weight: 500; text-decoration: none; display: block; }
+.adv-title:hover { color: var(--accent); }
+.adv-sub {
+  margin: 0.1875rem 0 0;
+  font-family: var(--mono); font-size: 0.75rem; color: var(--faint);
+  display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;
+}
+.adv-sub .sep { color: var(--rule); }
+.adv-sub .cve { color: var(--muted); }
+.no-cve { font-style: italic; }
+
+@media (max-width: 40rem) {
+  .adv { grid-template-columns: 1fr; gap: 0.25rem; }
+  .adv-id { padding-top: 0; }
+}
+
+/* --- Advisory detail ----------------------------------------------------- */
+
+.adv-head { margin-bottom: 2.5rem; }
+.adv-head .eyebrow {
+  font-family: var(--mono); font-size: 0.8125rem; color: var(--accent);
+  margin: 0 0 0.5rem;
+}
+.adv-head h1 { font-size: 1.5rem; }
+
+.facts {
+  margin: 0; border-top: 1px solid var(--rule);
+  font-size: 0.9375rem;
+}
+.facts > div {
+  display: grid; grid-template-columns: 11rem 1fr; gap: 0.25rem 1.5rem;
+  padding: 0.6875rem 0; border-bottom: 1px solid var(--rule);
+}
+.facts dt { color: var(--faint); font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.05em; padding-top: 0.125rem; }
+.facts dd { margin: 0; overflow-wrap: anywhere; }
+.facts .mono { font-family: var(--mono); font-size: 0.8125rem; }
+
+@media (max-width: 40rem) {
+  .facts > div { grid-template-columns: 1fr; }
+}
+
+.credit {
+  border-left: 2px solid var(--accent);
+  background: var(--bg-alt);
+  padding: 0.875rem 1.125rem; margin: 2.5rem 0 0;
+  font-size: 0.9375rem; color: var(--muted);
+}
+.credit p { margin: 0; }
+.credit cite { font-style: italic; }
+.credit .credit-src { display: block; margin-top: 0.5rem; font-size: 0.8125rem; color: var(--faint); }
+.credit .credit-alias {
+  margin: 0.75rem 0 0; padding-top: 0.75rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.8125rem; color: var(--muted);
+}
+.credit .credit-alias strong { color: var(--fg); font-weight: 600; }
+
+/* --- Prose --------------------------------------------------------------- */
+
+.prose > *:first-child { margin-top: 0; }
+.prose--detail { margin-top: 2.5rem; }
+.prose p, .prose ul, .prose ol { margin: 0 0 1.125rem; }
+.prose ul, .prose ol { padding-left: 1.25rem; }
+.prose li { margin-bottom: 0.375rem; }
+.prose img { max-width: 100%; height: auto; }
+.prose hr { border: 0; border-top: 1px solid var(--rule); margin: 2.5rem 0; }
+.prose blockquote {
+  margin: 1.5rem 0; padding-left: 1.125rem;
+  border-left: 2px solid var(--rule); color: var(--muted);
+}
+
+.prose :not(pre) > code {
+  background: var(--bg-alt);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 0.0625rem 0.3125rem;
+}
+
+.prose pre {
+  background: var(--bg-alt);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 0.875rem 1rem;
+  overflow-x: auto;          /* long lines scroll here, never the page */
+  line-height: 1.5;
+}
+.prose pre code { background: none; border: 0; padding: 0; }
+
+/* Tables scroll inside their own box rather than widening the page. */
+.table-scroll { overflow-x: auto; margin: 0 0 1.125rem; }
+.prose table { border-collapse: collapse; width: 100%; font-size: 0.9375rem; }
+.prose th, .prose td { text-align: left; padding: 0.5rem 0.875rem 0.5rem 0; border-bottom: 1px solid var(--rule); }
+.prose th { font-size: 0.8125rem; color: var(--faint); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+
+/* --- Post listing -------------------------------------------------------- */
+
+.post-list { list-style: none; margin: 0; padding: 0; }
+.post-item { padding: 1.125rem 0; border-bottom: 1px solid var(--rule); }
+.post-item h3 { margin: 0 0 0.25rem; }
+.post-item h3 a { text-decoration: none; }
+.post-item h3 a:hover { color: var(--accent); }
+.post-date { font-family: var(--mono); font-size: 0.75rem; color: var(--faint); }
+.post-excerpt { margin: 0.375rem 0 0; color: var(--muted); font-size: 0.9375rem; }
+
+.post-header { margin-bottom: 2.5rem; }
+.post-header h1 { margin-bottom: 0.375rem; }
+
+.empty {
+  border: 1px dashed var(--rule);
+  border-radius: 4px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  color: var(--faint);
+}
+.empty p { margin: 0; }
+
+/* --- Utility ------------------------------------------------------------- */
+
+.mono { font-family: var(--mono); }
+.muted { color: var(--muted); }
+.notice { color: var(--muted); font-size: 0.9375rem; }
+
+@media print {
+  .site-nav, .site-footer, .skip { display: none; }
+  body { color: #000; background: #fff; }
+  a { text-decoration: none; }
+}

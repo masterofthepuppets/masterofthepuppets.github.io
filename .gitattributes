@@ -1,0 +1,8 @@
+# Normalise line endings so the repo is byte-identical regardless of the OS
+# that commits to it. Silences the "LF will be replaced by CRLF" warnings.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary

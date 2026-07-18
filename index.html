@@ -1,0 +1,87 @@
+---
+layout: default
+permalink: /
+---
+{%- assign advs = site.advisories | sort: "date" | reverse -%}
+{%- assign cve_count = site.advisories | where_exp: "a", "a.cve" | size -%}
+{%- assign vendors = site.advisories | map: "vendor" | uniq -%}
+<div class="wrap">
+
+  <section class="hero">
+    <h1>{{ site.author.name }}</h1>
+    <p class="lede">
+      Independent security researcher. I find and report vulnerabilities in
+      enterprise software &mdash; management consoles, storage appliances and the
+      web layers bolted to them.
+    </p>
+    <p>
+      Work below is coordinated through vendor PSIRTs, the Trend Micro Zero Day
+      Initiative and SSD Secure Disclosure. Every advisory links to the vendor's
+      published acknowledgement, so nothing here needs to be taken on trust.
+    </p>
+
+    <ul class="stats">
+      <div>
+        <span class="stat-n">{{ cve_count }}</span>
+        <span class="stat-l">CVEs</span>
+      </div>
+      <div>
+        <span class="stat-n">{{ site.advisories | size }}</span>
+        <span class="stat-l">Advisories</span>
+      </div>
+      <div>
+        <span class="stat-n">{{ vendors | size }}</span>
+        <span class="stat-l">Vendors</span>
+      </div>
+    </ul>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>Latest advisories</h2>
+      <a href="{{ '/advisories/' | relative_url }}">All {{ site.advisories | size }} &rarr;</a>
+    </div>
+    <ol class="adv-list">
+      {%- for a in advs limit: 8 %}
+      <li class="adv">
+        <a class="adv-id" href="{{ a.url | relative_url }}">{{ a.advisory_id }}</a>
+        <div class="adv-body">
+          <a class="adv-title" href="{{ a.url | relative_url }}">{{ a.title }}</a>
+          <p class="adv-sub">
+            {%- if a.cve %}
+            <span class="cve">{{ a.cve }}</span>
+            {%- else %}
+            <span class="no-cve">no CVE assigned</span>
+            {%- endif %}
+            {%- if a.cvss %}
+            <span class="sep">&middot;</span><span>CVSS {{ a.cvss }}</span>
+            {%- endif %}
+            <span class="sep">&middot;</span>
+            <span><time datetime="{{ a.date | date_to_xmlschema }}">{{ a.date | date: "%b %Y" }}</time></span>
+          </p>
+        </div>
+      </li>
+      {%- endfor %}
+    </ol>
+  </section>
+
+  {%- if site.posts.size > 0 %}
+  <section>
+    <div class="section-head">
+      <h2>Latest research</h2>
+      <a href="{{ '/research/' | relative_url }}">All write-ups &rarr;</a>
+    </div>
+    <ul class="post-list">
+      {%- for post in site.posts limit: 3 %}
+      <li class="post-item">
+        <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+        <span class="post-date">
+          <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time>
+        </span>
+      </li>
+      {%- endfor %}
+    </ul>
+  </section>
+  {%- endif %}
+
+</div>

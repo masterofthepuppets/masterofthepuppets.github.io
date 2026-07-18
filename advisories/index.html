@@ -1,0 +1,44 @@
+---
+layout: default
+title: Advisories
+permalink: /advisories/
+description: >-
+  Security advisories published by Ahmed Y. Elmogy, covering CVEs in Dell,
+  ATEN, Ivanti, TrustPort and ASUSTOR products.
+---
+{%- assign advs = site.advisories | sort: "date" | reverse -%}
+{%- assign cve_count = site.advisories | where_exp: "a", "a.cve" | size -%}
+<div class="wrap">
+  <h1 class="page-title">Advisories</h1>
+  <p class="page-intro">
+    {{ site.advisories | size }} advisories, {{ cve_count }} assigned CVEs. Each entry
+    carries the vendor's own acknowledgement and links back to the source advisory.
+    Newest first.
+  </p>
+
+  {%- assign years = advs | group_by_exp: "a", "a.date | date: '%Y'" %}
+  {%- for y in years %}
+  <h2 class="year">{{ y.name }}</h2>
+  <ol class="adv-list">
+    {%- for a in y.items %}
+    <li class="adv">
+      <a class="adv-id" href="{{ a.url | relative_url }}">{{ a.advisory_id }}</a>
+      <div class="adv-body">
+        <a class="adv-title" href="{{ a.url | relative_url }}">{{ a.title }}</a>
+        <p class="adv-sub">
+          {%- if a.cve %}
+          <span class="cve">{{ a.cve }}</span>
+          {%- else %}
+          <span class="no-cve">no CVE assigned</span>
+          {%- endif %}
+          {%- if a.cvss %}
+          <span class="sep">&middot;</span><span>CVSS {{ a.cvss }}</span>
+          {%- endif %}
+          <span class="sep">&middot;</span><span>{{ a.coordination }}</span>
+        </p>
+      </div>
+    </li>
+    {%- endfor %}
+  </ol>
+  {%- endfor %}
+</div>

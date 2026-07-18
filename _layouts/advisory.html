@@ -1,0 +1,82 @@
+---
+layout: default
+---
+<article class="wrap wrap--prose">
+  <header class="adv-head">
+    <p class="eyebrow">{{ page.advisory_id }}</p>
+    <h1>{{ page.title }}</h1>
+  </header>
+
+  <dl class="facts">
+    <div>
+      <dt>CVE</dt>
+      <dd>{% if page.cve %}<span class="mono">{{ page.cve }}</span>{% else %}<span class="muted no-cve">None assigned</span>{% endif %}</dd>
+    </div>
+    <div><dt>Vendor</dt><dd>{{ page.vendor }}</dd></div>
+    <div><dt>Product</dt><dd>{{ page.product }}</dd></div>
+    {%- if page.affected %}
+    <div><dt>Affected</dt><dd class="mono">{{ page.affected }}</dd></div>
+    {%- endif %}
+    {%- if page.fixed %}
+    <div><dt>Fixed in</dt><dd class="mono">{{ page.fixed }}</dd></div>
+    {%- endif %}
+    {%- if page.component %}
+    <div><dt>Component</dt><dd class="mono">{{ page.component }}</dd></div>
+    {%- endif %}
+    <div>
+      <dt>Class</dt>
+      <dd>{{ page.vuln_class }}{% if page.cwe %} <span class="mono muted">{{ page.cwe }}</span>{% endif %}</dd>
+    </div>
+    {%- if page.cvss %}
+    <div>
+      <dt>CVSS</dt>
+      <dd><span class="mono">{{ page.cvss }}</span>{% if page.cvss_vector %}<br><span class="mono muted">{{ page.cvss_vector }}</span>{% endif %}</dd>
+    </div>
+    {%- endif %}
+    <div>
+      <dt>Disclosed</dt>
+      <dd><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time></dd>
+    </div>
+    {%- if page.coordination %}
+    <div><dt>Coordination</dt><dd>{{ page.coordination }}</dd></div>
+    {%- endif %}
+    {%- if page.refs and page.refs.size > 0 %}
+    <div>
+      <dt>References</dt>
+      <dd>
+        {%- for ref in page.refs %}
+        <a href="{{ ref.url }}" rel="noopener">{{ ref.label }}</a>{% unless forloop.last %}<br>{% endunless %}
+        {%- endfor %}
+      </dd>
+    </div>
+    {%- endif %}
+    {%- if page.writeup %}
+    <div><dt>Write-up</dt><dd><a href="{{ page.writeup | relative_url }}">Technical analysis</a></dd></div>
+    {%- endif %}
+  </dl>
+
+  {%- comment -%}
+    Explicit strip-and-compare rather than `!= blank`: Liquid's `blank` literal
+    dispatches to a `blank?` method whose presence on the operand isn't
+    something to gamble the layout on. Advisories with no prose body get no
+    empty div.
+  {%- endcomment -%}
+  {%- assign body = content | strip -%}
+  {%- if body != "" %}
+  <div class="prose prose--detail">
+    {{ content }}
+  </div>
+  {%- endif %}
+
+  {%- if page.credit %}
+  <aside class="credit">
+    <p><cite>&ldquo;{{ page.credit }}&rdquo;</cite></p>
+    {%- if page.credit_url %}
+    <span class="credit-src">&mdash; <a href="{{ page.credit_url }}" rel="noopener">{{ page.credit_source | default: "Vendor advisory" }}</a></span>
+    {%- endif %}
+    {%- if page.alias %}
+    <p class="credit-alias">Credited under the handle <strong>{{ page.alias }}</strong>, a disclosure alias of {{ site.author.name }}.</p>
+    {%- endif %}
+  </aside>
+  {%- endif %}
+</article>

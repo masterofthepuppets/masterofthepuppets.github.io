@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'en' }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+{%- comment -%}
+  GitHub Pages cannot set response headers, so this meta tag is the only place
+  a policy can be enforced. `default-src 'none'` with no script-src means no
+  JavaScript can execute here at all, inline or otherwise — including anything
+  injected later. If you ever add a script you must relax this deliberately.
+  (frame-ancestors is omitted because it is ignored in meta form by spec.)
+{%- endcomment -%}
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self'; style-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
+{%- if page.title -%}
+  {%- assign full_title = page.title | append: " · " | append: site.title -%}
+{%- else -%}
+  {%- assign full_title = site.title | append: " · " | append: site.tagline -%}
+{%- endif -%}
+{%- assign desc = page.description | default: site.description | strip_html | normalize_whitespace | strip | truncate: 200 -%}
+
+<title>{{ full_title | escape }}</title>
+<meta name="description" content="{{ desc | escape }}">
+<meta name="author" content="{{ site.author.name | escape }}">
+<link rel="canonical" href="{{ page.url | absolute_url }}">
+
+<meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+<meta property="og:site_name" content="{{ site.title | escape }}">
+<meta property="og:title" content="{{ page.title | default: site.title | escape }}">
+<meta property="og:description" content="{{ desc | escape }}">
+<meta property="og:url" content="{{ page.url | absolute_url }}">
+<meta name="twitter:card" content="summary">
+{%- if site.twitter_username %}
+<meta name="twitter:creator" content="@{{ site.twitter_username }}">
+{%- endif %}
+
+<link rel="icon" href="{{ '/favicon.svg' | relative_url }}" type="image/svg+xml">
+<link rel="alternate" type="application/atom+xml" title="{{ site.title | escape }}" href="{{ '/feed.xml' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/site.css' | relative_url }}">
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="{{ '/' | relative_url }}">{{ site.author.name }}<span class="brand-mark">.</span></a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="{{ '/advisories/' | relative_url }}"{% if page.url contains '/advisories' %} aria-current="page"{% endif %}>Advisories</a>
+      <a href="{{ '/research/' | relative_url }}"{% if page.url contains '/research' %} aria-current="page"{% endif %}>Research</a>
+      <a href="{{ '/about/' | relative_url }}"{% if page.url contains '/about' %} aria-current="page"{% endif %}>About</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  {{ content }}
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>&copy; {{ 'now' | date: "%Y" }} {{ site.author.name }}</span>
+    <span class="footer-links">
+      <a href="https://github.com/{{ site.github_username }}" rel="me noopener">GitHub</a>
+      <a href="https://x.com/{{ site.twitter_username }}" rel="me noopener">X</a>
+      <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
+    </span>
+  </div>
+</footer>
+</body>
+</html>
