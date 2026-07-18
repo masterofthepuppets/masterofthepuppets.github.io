@@ -25,7 +25,8 @@ Full list: [advisories]({{ '/advisories/' | relative_url }}).
 Aside from the CVEs, I've collected a number of vendor halls-of-fame and
 security acknowledgements over the years — mostly web bugs (XSS, CSRF, OAuth vulnerabilities and
 access-control issues) that never warranted a CVE. Not a big deal, but part of
-the record: Facebook, Intel, BlackBerry, SAP Concur, Stellantis, Deutsche
+the record: Facebook, PayPal, Optimizely, Buffer, Intel, Vimeo, 
+United Airliens, BlackBerry, SAP Concur, Stellantis, Deutsche
 Telekom, Hootsuite, ConvertKit, Vyond, HOVER, QNAP and Red Hat.
 
 Several of the bug-bounty credits are on my
