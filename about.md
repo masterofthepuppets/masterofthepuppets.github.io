@@ -31,11 +31,11 @@ Telekom, Hootsuite, ConvertKit, Vyond, HOVER, QNAP and Red Hat.
 Several of the bug-bounty credits are on my
 [Bugcrowd profile](https://bugcrowd.com/h/{{ site.bugcrowd_username }}); a few
 sit on the vendors' own pages —
-[Red Hat](https://access.redhat.com/articles/66234)
-[Telekom](https://www.telekom.com/en/company/data-privacy-and-security/news/acknowledgements-358300)
-[QNAP](https://www.qnap.com/en-me/security-bounty-program)
-[Vyond](https://help.vyond.com/hc/en-us/articles/17221671439764-How-do-I-Report-a-Security-Vulnerability)
-[BlackBerry](https://www.blackberry.com/en/secure-communications/services/psirt)
+[Red Hat](https://access.redhat.com/articles/66234),
+[Telekom](https://www.telekom.com/en/company/data-privacy-and-security/news/acknowledgements-358300),
+[QNAP](https://www.qnap.com/en-me/security-bounty-program),
+[Vyond](https://help.vyond.com/hc/en-us/articles/17221671439764-How-do-I-Report-a-Security-Vulnerability),
+[BlackBerry](https://www.blackberry.com/en/secure-communications/services/psirt), and 
 [Hootsuite](https://www.hootsuite.com/security).
 
 ## Contact
